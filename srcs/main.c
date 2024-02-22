@@ -11,6 +11,8 @@ int main(int c, char **v) {
 	fetch_input(--c, ++v, arr);
 	if (!strncmp(*--v, "b", 2))
 		bubble_sort(arr, c);
+	else if (!strncmp(*v, "q", 2))
+		quick_sort(arr, 0, c - 1);
 	print_array(arr, c);
 }
 
