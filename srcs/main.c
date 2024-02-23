@@ -5,15 +5,14 @@ void	fetch_input(int c, char **v, int arr[]);
 void	print_array(int arr[], size_t size);
 
 int main(int c, char **v) {
-	int arr[--c];
+	int arr[c - 2];
 	++v;
-	--c;
-	fetch_input(--c, ++v, arr);
+	fetch_input(c - 1, ++v, arr);
 	if (!strncmp(*--v, "b", 2))
-		bubble_sort(arr, c);
+		bubble_sort(arr, c - 2);
 	else if (!strncmp(*v, "q", 2))
-		quick_sort(arr, 0, c - 1);
-	print_array(arr, c);
+		quick_sort(arr, c - 2);
+	print_array(arr, c - 2);
 }
 
 void fetch_input(int c, char **v, int arr[]) {
@@ -26,6 +25,6 @@ void fetch_input(int c, char **v, int arr[]) {
 void print_array(int arr[], size_t size) {
 	size_t i = -1;
 
-	while (++i <= size)
+	while (++i < size)
 		printf("%d\n", arr[i]);
 }

@@ -1,36 +1,46 @@
 #include "sort.h"
 
 static size_t partition(int arr[], size_t start, size_t end);
+static void quick_sort_recursion(int arr[], size_t start, size_t end);
 
-void quick_sort(int arr[], size_t start, size_t end) {
-	size_t i;
-
-	i = partition(arr, start, end);
-
-	if (i < end)
-	{
-		quick_sort(arr, i, end);
-		quick_sort(arr, start, i - 1);
-	}
+void quick_sort(int arr[], size_t size) {
+	quick_sort_recursion(arr, 0, size - 1);
 }
 
-static void ft_coop(int *a, int *b) {
-	*a = *a ^ *b;
-	*b = *a ^ *b;
-	*a = *a ^ *b;
+static void ft_coop(int *a, int *b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
 }
 
-static size_t partition(int arr[], size_t start, size_t end) {
-	size_t pivot = end;
-	while (start < end)
+static size_t partition(int arr[], size_t start, size_t end)
+{
+	int pivot_value = arr[end];
+	size_t i = start;
+	size_t j = start;
+
+	while (j < end)
 	{
-		while (arr[start] < arr[pivot])
-			++start;
-		while (arr[end] >= arr[pivot] && end > start)
-			--end;
-		if (start < end)
-			ft_coop(&arr[start], &arr[end]);
+		if (arr[j] <= pivot_value)
+		{
+			ft_coop(&arr[j], &arr[i]);
+			++i;
+		}
+		++j;
 	}
-	ft_coop(&arr[start], &arr[pivot]);
-	return (start);
+	ft_coop(&arr[i], &arr[end]);
+	return (i);
+}
+
+void quick_sort_recursion(int arr[], size_t start, size_t end)
+{
+	if (start < end)
+	{
+		size_t i = partition(arr, start, end);
+		if (i != 0)
+			quick_sort_recursion(arr, start, i - 1);
+		if (i + 1 < end)
+			quick_sort_recursion(arr, i + 1, end);
+	}
 }
