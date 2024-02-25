@@ -20,6 +20,7 @@ int main(int c, char **v) {
 	else if (!strncmp(*v, "m", arr_size))
 		merge_sort(arr, 0, arr_size - 1);
 	print_array(arr, arr_size);
+	free(arr);
 	return (0);
 }
 
