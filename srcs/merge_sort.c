@@ -13,7 +13,7 @@ void merge_sort(int arr[], size_t p, size_t r)
 	merge_(arr, p, q, r);
 }
 
-void merge_(int arr[], size_t start, size_t mid, size_t end)
+static void merge_(int arr[], size_t start, size_t mid, size_t end)
 {
 	size_t p, q, i;
 	int *temp = malloc(sizeof(int) * (end - start + 1));

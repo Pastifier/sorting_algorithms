@@ -9,16 +9,17 @@ int main(int c, char **v) {
 		return (0);
 	if (c <= 2)
 		return (-1);
-	int arr[c - 2];
+	size_t arr_size = c - 2;
+	int *arr = malloc(sizeof(int) * arr_size);
 	++v;
 	fetch_input(c - 1, ++v, arr);
 	if (!strncmp(*--v, "b", 2))
-		bubble_sort(arr, c - 2);
+		bubble_sort(arr, arr_size);
 	else if (!strncmp(*v, "q", 2))
-		quick_sort(arr, c - 2);
-	else if (!strncmp(*v, "m", c - 2))
-		merge_sort(arr, 0, (c - 2) - 1);
-	print_array(arr, c - 2);
+		quick_sort(arr, arr_size);
+	else if (!strncmp(*v, "m", arr_size))
+		merge_sort(arr, 0, arr_size - 1);
+	print_array(arr, arr_size);
 	return (0);
 }
 
