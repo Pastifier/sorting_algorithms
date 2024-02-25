@@ -7,6 +7,8 @@ void	print_array(int arr[], size_t size);
 int main(int c, char **v) {
 	if (c < 3)
 		return (0);
+	if (c <= 2)
+		return (-1);
 	int arr[c - 2];
 	++v;
 	fetch_input(c - 1, ++v, arr);

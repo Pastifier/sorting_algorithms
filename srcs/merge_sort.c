@@ -1,65 +1,40 @@
 #include "sort.h"
 
 void merge_sort(int arr[], size_t p, size_t r);
-static void merge(int arr[], size_t p, size_t q, size_t r);
-static int *iarrdup(int arr[], size_t size);
-static void swap_ints(int *a, int *b);
+static void merge_(int arr[], size_t p, size_t q, size_t r);
 
 void merge_sort(int arr[], size_t p, size_t r)
 {
-	(void)swap_ints;
 	if ((r - p) == 0 || p >= r)
 		return ;
 	size_t q = (r + p) / 2;
 	merge_sort(arr, p, q);
 	merge_sort(arr, q + 1, r);
-	merge(arr, p, q, r);
+	merge_(arr, p, q, r);
 }
 
-static void merge(int arr[], size_t p, size_t q, size_t r)
+void merge_(int arr[], size_t start, size_t mid, size_t end)
 {
-	int *arr1 = iarrdup(arr, q - p + 1);
-	int *arr2 = iarrdup(arr + q + 1, r - q);
-	size_t i = p;
-	size_t i1 = 0;
-	size_t i2 = 0;
-
-	while (i1 < q - p + 1 && i2 < r - q)
+	size_t p, q, i;
+	int *temp = malloc(sizeof(int) * (end - start + 1));
+	i = 0;
+	p = start;
+	q = mid + 1;
+	while (p <= mid && q <= end)
 	{
-		if (arr1[i1] <= arr2[i2])
-		{
-			arr[i] = arr1[i1];
-			++i1;
-		}
+		if (arr[p] < arr[q])
+			(temp[i] = arr[p], ++p);
 		else
-		{
-			arr[i] = arr2[i2];
-			++i2;
-		}
+			(temp[i] = arr[q], ++q);
 		++i;
 	}
 
-	while (i1 < q - p + 1)
-		arr[i++] = arr1[i1++];
-	while (++i2 < r - q)
-		arr[i++] = arr2[i2++];
-
-	(free(arr1), free(arr2));
-}
-
-static int *iarrdup(int arr[], size_t size)
-{
-	size_t i = -1;
-	int *self = malloc(sizeof(int) * size);
-
-	while (++i < size)
-		self[i] = arr[i];
-	return (self);
-}
-
-static void swap_ints(int *a, int *b)
-{
-	*a = *a ^ *b;
-	*b = *a ^ *b;
-	*a = *a ^ *b;
+	while (p <= mid)
+		(temp[i++] = arr[p], ++p);
+	while (q <= end)
+		(temp[i++] = arr[q], ++q);
+	i = 0;
+	p = start;
+	while (p <= end)
+		arr[p++] = temp[i++];
 }
