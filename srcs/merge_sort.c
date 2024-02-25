@@ -37,4 +37,5 @@ void merge_(int arr[], size_t start, size_t mid, size_t end)
 	p = start;
 	while (p <= end)
 		arr[p++] = temp[i++];
+	free(temp);
 }
