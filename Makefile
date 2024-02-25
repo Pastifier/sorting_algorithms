@@ -7,7 +7,7 @@ NAME := sort
 INCLUDE := sort.h
 INCLUDES := $(addprefix includes/, $(INCLUDE))
 
-SRC  := main.c bubble_sort.c quick_sort.c
+SRC  := main.c bubble_sort.c quick_sort.c merge_sort.c
 SRCS := $(addprefix srcs/, $(SRC));
 
 all : $(NAME)

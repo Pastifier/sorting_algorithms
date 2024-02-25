@@ -5,6 +5,8 @@ void	fetch_input(int c, char **v, int arr[]);
 void	print_array(int arr[], size_t size);
 
 int main(int c, char **v) {
+	if (c < 3)
+		return (0);
 	int arr[c - 2];
 	++v;
 	fetch_input(c - 1, ++v, arr);
@@ -12,7 +14,10 @@ int main(int c, char **v) {
 		bubble_sort(arr, c - 2);
 	else if (!strncmp(*v, "q", 2))
 		quick_sort(arr, c - 2);
+	else if (!strncmp(*v, "m", c - 2))
+		merge_sort(arr, 0, (c - 2) - 1);
 	print_array(arr, c - 2);
+	return (0);
 }
 
 void fetch_input(int c, char **v, int arr[]) {

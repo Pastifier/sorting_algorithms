@@ -8,5 +8,6 @@
 
 void	bubble_sort(int arr[], size_t size);
 void	quick_sort(int arr[], size_t size);
+void	merge_sort(int arr[], size_t p, size_t r);
 
 #endif // !SORT_H
