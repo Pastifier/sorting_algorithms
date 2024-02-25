@@ -1,6 +1,6 @@
 # Necessisities
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -Wpedantic -fsanitize=address,undefined -g3
+CFLAGS := -Wall -Wextra -Werror -Wpedantic -g3
 
 NAME := sort
 
@@ -15,8 +15,12 @@ all : $(NAME)
 $(NAME) : $(SRCS)
 	$(CC) $(CFLAGS) -o $@ -Iincludes $(SRCS)
 
+sanitize :
+	$(CC) $(CFLAGS) -fsanitize=address,undefined -o $@ -Iincludes $(SRCS)
+
 clean :
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
+	@rm -rf sanitize
 
 fclean : clean
 
